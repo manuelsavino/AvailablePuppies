@@ -5,6 +5,7 @@ import {
   FilterOptions,
   FilterButton,
   FilterOuter,
+  FilterCheckbox,
 } from "./FiltersStyled"
 
 export default function Filters({
@@ -30,7 +31,20 @@ export default function Filters({
   }
   return (
     <FilterBar>
-      <h2>FILTERS</h2>
+      <h2>
+        <svg
+          stroke="currentColor"
+          fill="currentColor"
+          strokeWidth="0"
+          viewBox="0 0 24 24"
+          height="1em"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M7 11H17V13H7zM4 7H20V9H4zM10 15H14V17H10z"></path>
+        </svg>
+        Filter By
+      </h2>
       <FilterContainer>
         <FilterOuter>
           <FilterButton
@@ -44,7 +58,10 @@ export default function Filters({
           <FilterOptions active={activeMenu.location || false}>
             {locations &&
               locations.map(loc => (
-                <label key={loc}>
+                <FilterCheckbox
+                  key={loc}
+                  checked={locationFilters[loc] || false}
+                >
                   <input
                     type="checkbox"
                     name={loc}
@@ -53,7 +70,7 @@ export default function Filters({
                     checked={locationFilters[loc] || false}
                   />
                   {loc.charAt(0).toUpperCase() + loc.slice(1)}
-                </label>
+                </FilterCheckbox>
               ))}
           </FilterOptions>
         </FilterOuter>
@@ -69,7 +86,7 @@ export default function Filters({
           <FilterOptions active={activeMenu.type || false}>
             {displayBreeds &&
               Object.keys(typeFilters).map(type => (
-                <label key={type}>
+                <FilterCheckbox key={type} checked={typeFilters[type]}>
                   <input
                     type="checkbox"
                     name={type}
@@ -78,7 +95,7 @@ export default function Filters({
                     checked={typeFilters[type]}
                   />
                   {type}
-                </label>
+                </FilterCheckbox>
               ))}
           </FilterOptions>
         </FilterOuter>
@@ -94,16 +111,16 @@ export default function Filters({
           <FilterOptions active={activeMenu.gender || false}>
             {displayBreeds &&
               Object.keys(genderFilters).map(gender => (
-                <label key={gender}>
+                <FilterCheckbox key={gender} checked={genderFilters[gender]}>
                   <input
                     type="checkbox"
                     name={gender}
                     data-type="gender"
                     onChange={handleCheckfilterChange}
-                    checked={genderFilters[gender]}
+                    checked={genderFilters[gender] || false}
                   />
                   {gender}
-                </label>
+                </FilterCheckbox>
               ))}
           </FilterOptions>
         </FilterOuter>
@@ -119,7 +136,10 @@ export default function Filters({
           <FilterOptions active={activeMenu.breed || false}>
             {displayBreeds &&
               displayBreeds.map(breed => (
-                <label key={breed.BreedName}>
+                <FilterCheckbox
+                  key={breed.BreedName}
+                  checked={breedFilters[breed.BreedName] || false}
+                >
                   <input
                     type="checkbox"
                     name={breed.BreedName}
@@ -128,7 +148,7 @@ export default function Filters({
                     checked={breedFilters[breed.BreedName] || false}
                   />
                   {breed.BreedName}
-                </label>
+                </FilterCheckbox>
               ))}
           </FilterOptions>
         </FilterOuter>

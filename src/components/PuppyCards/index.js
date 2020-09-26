@@ -1,4 +1,5 @@
 import React from "react"
+
 import {
   PuppyCardStyled,
   PuppyNameBread,
@@ -12,7 +13,12 @@ export default function PuppyCard({ pup }) {
     : `https://www.petlandflorida.com/wp-content/themes/petland/assets/images/no-available.png`
 
   return (
-    <PuppyCardStyled>
+    <PuppyCardStyled
+      to="/puppyDetails"
+      data-sal="slide-up"
+      data-sal-delay="300"
+      data-sal-easing="ease-out-back"
+    >
       <img src={imageUrl} />
       <div>
         <PuppyInfo>

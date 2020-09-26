@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import PuppyCard from "../components/PuppyCards"
-import { Container } from "../components/common/layoutStyled"
+import { Container, Heading } from "../components/common/layoutStyled"
 import { CardContainer } from "../components/PuppyCards/PuppyCardStyled"
 import Filters from "../components/Filters"
 
@@ -146,6 +146,9 @@ const IndexPage = () => {
       <SEO title="Home" />
       <Hero />
       <Container>
+        <Heading>
+          <span>AVAILABLE</span>PUPPIES
+        </Heading>
         <Filters
           handleCheckfilterChange={handleCheckfilterChange}
           locations={locations}
