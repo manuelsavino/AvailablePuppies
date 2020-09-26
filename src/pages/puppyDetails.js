@@ -9,8 +9,8 @@ import {
   PuppyDetailsInfo,
 } from "../components/PuppyDetails/PuppyDetailsStyled"
 
-export default function puppyDetails() {
-  const pup = window.history.state
+export default function puppyDetails(props) {
+  const pup = props.location.state
   const imageUrl = pup.Photo
     ? `${pup.Photo.BaseUrl}${pup.Photo.Size500}`
     : `https://www.petlandflorida.com/wp-content/themes/petland/assets/images/no-available.png`
@@ -18,6 +18,7 @@ export default function puppyDetails() {
     <Layout>
       <SEO title="Home" />
       <Hero height="200px" />
+      {console.log()}
       <Container>
         <PuppyDetailsContainer>
           <PuppyDetailsImage src={imageUrl} />

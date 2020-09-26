@@ -20,7 +20,7 @@ export const CardContainer = styled.div`
   }
 `
 
-export const PuppyCardStyled = styled.div`
+export const PuppyCardStyled = styled(Link)`
   background: white;
   border: solid 1px rgba(0, 0, 0, 0.1);
   box-shadow: 0 2px 4px 0 rgba(204, 204, 204, 0.5);

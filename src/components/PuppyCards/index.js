@@ -18,6 +18,7 @@ export default function PuppyCard({ pup }) {
       data-sal="slide-up"
       data-sal-delay="300"
       data-sal-easing="ease-out-back"
+      state={pup}
     >
       <img src={imageUrl} />
       <div>
