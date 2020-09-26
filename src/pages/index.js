@@ -7,6 +7,8 @@ import { Container } from "../components/common/layoutStyled"
 import { CardContainer } from "../components/PuppyCards/PuppyCardStyled"
 import Filters from "../components/Filters"
 
+import { Hero } from "../components/Hero"
+
 const IndexPage = () => {
   const [pups, setPups] = useState([])
   const [loading, setLoading] = useState(true)
@@ -142,6 +144,7 @@ const IndexPage = () => {
   return (
     <Layout>
       <SEO title="Home" />
+      <Hero />
       <Container>
         <Filters
           handleCheckfilterChange={handleCheckfilterChange}

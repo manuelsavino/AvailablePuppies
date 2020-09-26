@@ -65,7 +65,7 @@ export const FilterButton = styled.button`
 
 export const FilterOuter = styled.div`
   min-width: 30%;
-  width: 200px;
+  width: 240px;
   max-width: 300px;
   @media screen and (max-width: 1200px) {
     width: 100%;
@@ -89,12 +89,13 @@ export const FilterOptions = styled.div`
   padding: 10px;
   border: solid 1px rgba(0, 0, 0, 0.2);
   label {
-    font-size: 0.9em;
+    font-size: 0.75em;
+    padding: 5px 0;
     input {
       margin-right: 10px;
     }
   }
   @media screen and (max-width: 768px) {
-    width: 100%;
+    width: 95%;
   }
 `
