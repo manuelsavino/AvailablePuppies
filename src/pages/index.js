@@ -6,6 +6,7 @@ import PuppyCard from "../components/PuppyCards"
 import { Container, Heading } from "../components/common/layoutStyled"
 import { CardContainer } from "../components/PuppyCards/PuppyCardStyled"
 import Filters from "../components/Filters"
+import Loading from "../images/loading.svg"
 
 import { Hero } from "../components/Hero"
 
@@ -162,11 +163,25 @@ const IndexPage = () => {
         {displayPups.length ? (
           <CardContainer>
             {displayPups.map(pup => {
-              return <PuppyCard key={pup.PetId} pup={pup}></PuppyCard>
+              return <PuppyCard key={pup.PetId} pup={pup} />
             })}
           </CardContainer>
         ) : loading ? (
-          <h2>Loading</h2>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+              paddingTop: "200px",
+              paddingBottom: "200px",
+              color: "#333333",
+            }}
+          >
+            <img style={{ width: "250px" }} src={Loading} />
+            <h2>Loading...</h2>
+          </div>
         ) : (
           <div
             style={{
@@ -175,7 +190,8 @@ const IndexPage = () => {
               justifyContent: "center",
               alignItems: "center",
               width: "100%",
-              paddingTop: "20px",
+              paddingTop: "50px",
+              paddingBottom: "100px",
               color: "#333333",
             }}
           >

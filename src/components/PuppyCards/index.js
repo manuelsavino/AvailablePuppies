@@ -13,13 +13,7 @@ export default function PuppyCard({ pup }) {
     : `https://www.petlandflorida.com/wp-content/themes/petland/assets/images/no-available.png`
 
   return (
-    <PuppyCardStyled
-      to="/puppyDetails"
-      data-sal="slide-up"
-      data-sal-delay="300"
-      data-sal-easing="ease-out-back"
-      state={pup}
-    >
+    <PuppyCardStyled to="/puppyDetails" state={pup}>
       <img src={imageUrl} />
       <div>
         <PuppyInfo>
