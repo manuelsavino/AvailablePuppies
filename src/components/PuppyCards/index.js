@@ -1,5 +1,4 @@
 import React from "react"
-
 import {
   PuppyCardStyled,
   PuppyNameBread,
@@ -7,14 +6,16 @@ import {
   PuppyLocation,
 } from "./PuppyCardStyled"
 
+import ComingSoon from "../../images/ImageComingSoon.png"
+
 export default function PuppyCard({ pup }) {
   const imageUrl = pup.Photo
     ? `${pup.Photo.BaseUrl}${pup.Photo.Size300}`
-    : `https://www.petlandflorida.com/wp-content/themes/petland/assets/images/no-available.png`
+    : ComingSoon
 
   return (
     <PuppyCardStyled to="/puppyDetails" state={pup}>
-      <img src={imageUrl} />
+      <img src={imageUrl} alt={pup.BreedName} />
       <div>
         <PuppyInfo>
           <span>{pup.PetType}</span>•<span>{pup.Gender}</span>•

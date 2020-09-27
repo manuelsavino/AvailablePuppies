@@ -3,12 +3,11 @@ import React, { useEffect, useState } from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import PuppyCard from "../components/PuppyCards"
+import Filters from "../components/Filters"
 import { Container, Heading } from "../components/common/layoutStyled"
 import { CardContainer } from "../components/PuppyCards/PuppyCardStyled"
-import Filters from "../components/Filters"
-import Loading from "../images/loading.svg"
-
 import { Hero } from "../components/Hero"
+import Loading from "../images/loading.svg"
 
 const IndexPage = () => {
   const [pups, setPups] = useState([])
@@ -54,6 +53,9 @@ const IndexPage = () => {
           ...typeFilters,
           [e.target.name]: !typeFilters[e.target.name],
         })
+        break
+      default:
+        return
     }
   }
 
@@ -80,48 +82,6 @@ const IndexPage = () => {
     fetchPups()
   }, [])
 
-  const applyFilters = () => {
-    const locationFilterArr = Object.keys(locationFilters).filter(
-      loc => locationFilters[loc] === true
-    )
-    const breedFiltersArr = Object.keys(breedFilters).filter(
-      breed => breedFilters[breed] === true
-    )
-
-    const genderFiltersArr = Object.keys(genderFilters).filter(
-      gender => genderFilters[gender] === true
-    )
-
-    const typeFiltersArr = Object.keys(typeFilters).filter(
-      type => typeFilters[type] === true
-    )
-    let filteredData = [...pups]
-    if (locationFilterArr.length) {
-      filteredData = filteredData.filter(pup =>
-        locationFilterArr.includes(pup.Location)
-      )
-    }
-    if (breedFiltersArr.length) {
-      filteredData = filteredData.filter(pup =>
-        breedFiltersArr.includes(pup.BreedName)
-      )
-    }
-
-    if (genderFiltersArr.length) {
-      filteredData = filteredData.filter(pup =>
-        genderFiltersArr.includes(pup.Gender)
-      )
-    }
-
-    if (typeFiltersArr.length) {
-      filteredData = filteredData.filter(pup =>
-        typeFiltersArr.includes(pup.PetType)
-      )
-    }
-
-    setDisplayPups(filteredData)
-  }
-
   useEffect(() => {
     const typeFiltersArr = Object.keys(typeFilters).filter(
       type => typeFilters[type] === true
@@ -135,12 +95,46 @@ const IndexPage = () => {
     } else {
       setDisplayBreeds(breeds)
     }
-    // console.log(typeFiltersArr.length)
-  }, [typeFilters])
+  }, [typeFilters, breeds])
 
+  //Call Apply Filters when any of the filters change
   useEffect(() => {
+    const applyFilters = () => {
+      //Get all types of filters
+      const filters = [
+        { obj: locationFilters, name: "Location" },
+        { obj: breedFilters, name: "BreedName" },
+        { obj: genderFilters, name: "Gender" },
+        { obj: typeFilters, name: "PetType" },
+      ]
+
+      //Check what filter is set to true
+      const filtersAndTypes = filters.map(filterType => {
+        const TempFilter = Object.keys(filterType.obj).filter(
+          type => filterType.obj[type] === true
+        )
+        return {
+          arr: TempFilter,
+          filterTypeName: filterType.name,
+        }
+      })
+      let filteredData = [...pups]
+      //filters temp variable to what filters have as set to true to be then set to displayPups state
+      function filterResults(arr, type) {
+        if (arr.length) {
+          filteredData = filteredData.filter(pup => arr.includes(pup[type]))
+        }
+      }
+
+      //Iterate throguh the types of filters array and calls function that does the filtering
+      filtersAndTypes.forEach(filterType => {
+        filterResults(filterType.arr, filterType.filterTypeName)
+      })
+      //set display pups state to the temp filtered array.
+      setDisplayPups(filteredData)
+    }
     applyFilters()
-  }, [locationFilters, breedFilters, genderFilters, typeFilters])
+  }, [locationFilters, breedFilters, genderFilters, typeFilters, pups])
 
   return (
     <Layout>
@@ -179,7 +173,11 @@ const IndexPage = () => {
               color: "#333333",
             }}
           >
-            <img style={{ width: "250px" }} src={Loading} />
+            <img
+              style={{ width: "250px" }}
+              src={Loading}
+              alt="loading illustration"
+            />
             <h2>Loading...</h2>
           </div>
         ) : (

@@ -15,6 +15,9 @@ export const FilterBar = styled.div`
   @media screen and (max-width: 1399px) {
     max-width: 90vw;
     margin: auto;
+    & > h2 {
+      font-size: 1.4em;
+    }
   }
   @media screen and (max-width: 1200px) {
     flex-direction: column;
