@@ -6,7 +6,7 @@ import {
   PuppyLocation,
 } from "./PuppyCardStyled"
 
-import ComingSoon from "../../images/ImageComingSoon.png"
+import ComingSoon from "../../images/imageComingSoon.png"
 
 export default function PuppyCard({ pup }) {
   const imageUrl = pup.Photo
